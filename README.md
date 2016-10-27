@@ -56,6 +56,6 @@ Open Licence
 * api.apixu.com
 
 ## Demos
-https://rawgit.com/saishmenon/IA1_Redo/master/weatherData.html
+http://rawgit.com/saishmenon/IA1_Redo/master/weatherData.html
 https://rawgit.com/saishmenon/IA1_Redo/master/windDirection.html
 
