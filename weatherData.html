@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Whether data</title>
+    
+    <style>
+        body{
+            background-color: #1abc9c;    
+        }
+        
+        h1, h4{
+            text-align: center;
+        }
+        
+        h1{
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        
+        .key{
+            display: inline;
+        }
+        
+        p#tempDiv{
+            padding: 5px;
+            background-color: #e74c3c;
+            width: 100px;
+            color: white;
+            text-align: center;
+        }
+        
+        p#HumidityDiv{
+            padding: 5px;
+            background-color: #95a5a6;
+            width: 100px;
+            color: white;
+            text-align: center;
+        }
+
+        .after-box {
+            border: 3px solid red;
+        }
+            </style>
+    
+    <script src="p5/p5.js"></script>
+        <script src="p5/addons/p5.dom.min.js"></script>
+    <script>
+        
+        var weather;
+        
+        var url;
+        
+        function setup(){
+            createCanvas(1350, 300);
+            setInterval(callNewCity, 1000);
+        }
+        
+        function callNewCity(){
+            var cities = ['London', 'Moscow', 'Mumbai', 'Rochester', 'Miami', 'SanFransisco', 'LosAngeles'];
+            var city = random(cities);
+            url = "http://api.openweathermap.org/data/2.5/forecast/city?q="+city+"&units=metric&APPID=c8d8bbd6547e1a5069bbe22827fd900f";
+            
+            loadJSON(url, gotData);
+        }
+        
+        var CityNameDiv;
+        var TemperatureDiv;
+        var HumidityDiv;        
+        
+        
+        function gotData(data){
+//            console.log(data.list[0].main.temp);
+            weather = data;
+            
+//            console.log("City: " + weather.city.name);
+//            console.log("Temperature: " + weather.list[0].main.temp + " Degree Celcius");
+//            console.log("Humidity: " + weather.list[0].main.humidity);
+            
+//            CityNameDiv = createDiv("City: " + weather.city.name);
+//            CityNameDiv.position(400, 300);
+//            removeElements();
+        }
+        
+        function draw(){
+            background('#f1c40f');
+            if(weather){
+                var temp = weather.list[0].main.temp;
+                var humidity = weather.list[0].main.humidity;
+                
+                noStroke();
+                fill('#e74c3c');
+                ellipse(400, 150, temp*2, temp*2);
+                fill('#95a5a6');
+                noStroke();
+                ellipse(900, 150, humidity*2, humidity*2);
+                
+//                TemperatureDiv = createDiv("Temperature: " + weather.list[0].main.temp + " Degree Celcius");
+//                HumidityDiv = createDiv("Humidity: " + weather.list[0].main.humidity);
+            }
+        }
+    </script>
+</head>
+<body>
+   
+   <h1>Temperature and Humidity of Cities around the World</h1>
+    <h4>Temperature and Humidity of cities - 'London', 'Moscow', 'Mumbai', 'Rochester', 'Miami', 'SanFransisco', 'LosAngeles'</h4>
+    <div class="key">
+        <p id="tempDiv">Temperature</p>
+        <p id="HumidityDiv">Humidity</p> 
+    </div>   
+</body>
+</html>
